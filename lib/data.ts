@@ -20,8 +20,8 @@ export const profile = {
   // Replace the links below with your real profiles.
   socials: [
     { label: "GitHub", icon: "github", href: "https://github.com/" },
-    { label: "LinkedIn", icon: "linkedin", href: "https://linkedin.com/in/" },
-    { label: "Instagram", icon: "instagram", href: "https://instagram.com/" },
+    { label: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/in/yosef-naser-06ab90353" },
+    { label: "Instagram", icon: "instagram", href: "https://www.instagram.com/ofes._.naser" },
   ] as { label: string; icon: "github" | "linkedin" | "instagram"; href: string }[],
 };
 
