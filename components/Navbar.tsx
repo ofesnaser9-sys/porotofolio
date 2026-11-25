@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Search, Menu, X } from "lucide-react";
+import { Search, Menu, X, ArrowUpRight, MessageCircle } from "lucide-react";
+import { socialIcon } from "./SocialIcons";
 import ThemeToggle from "./ThemeToggle";
 import { goTo } from "../lib/nav";
 import { profile } from "../lib/data";
@@ -93,18 +94,30 @@ export default function Navbar() {
       </motion.nav>
 
       <div className={`mnav ${open ? "open" : ""}`} role="dialog" aria-modal="true" aria-label="Menu" aria-hidden={!open}>
-        <button className="icon-btn mnav-close" onClick={() => setOpen(false)} aria-label="Close menu" tabIndex={open ? 0 : -1}><X size={16} /></button>
+        <div className="mnav-head">
+          <span className="mnav-brand">OFES<span> NASER</span></span>
+          <button className="icon-btn mnav-close" onClick={() => setOpen(false)} aria-label="Close menu" tabIndex={open ? 0 : -1}><X size={16} /></button>
+        </div>
         <div className="mnav-links">
           {links.map((l, i) => (
             <a key={l.id} href={`#${l.id}`} ref={i === 0 ? first : undefined} tabIndex={open ? 0 : -1} style={{ ["--i" as any]: i }}
               onClick={(e) => { e.preventDefault(); setOpen(false); setTimeout(() => goTo(l.id), 260); }}>
-              <small>{String(i + 1).padStart(2, "0")}</small>{l.label}
+              <small>{String(i + 1).padStart(2, "0")}</small>
+              <span>{l.label}</span>
+              <ArrowUpRight size={18} className="mnav-arrow" />
             </a>
           ))}
         </div>
-        <button className="btn btn-ghost" tabIndex={open ? 0 : -1} onClick={() => { setOpen(false); setTimeout(() => window.dispatchEvent(new Event("open-palette")), 260); }}>
-          <Search size={15} /> Command menu
-        </button>
+        <div className="mnav-foot">
+          <div className="mnav-soc">
+            <a href={profile.whatsapp} target="_blank" rel="noreferrer" className="soc-btn" aria-label="WhatsApp" tabIndex={open ? 0 : -1}><MessageCircle size={18} /></a>
+            {profile.socials.map((x) => {
+              const Icon = socialIcon[x.icon];
+              return <a key={x.label} href={x.href} target="_blank" rel="noreferrer" className="soc-btn" aria-label={x.label} tabIndex={open ? 0 : -1}><Icon size={18} /></a>;
+            })}
+          </div>
+          <a href={`mailto:${profile.email}`} className="mnav-mail" tabIndex={open ? 0 : -1}>{profile.email}</a>
+        </div>
       </div>
     </>
   );
