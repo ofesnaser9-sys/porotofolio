@@ -6,6 +6,7 @@ import Magnetic from "./Magnetic";
 import Roll from "./Roll";
 import { toast } from "../lib/theme";
 import { profile } from "../lib/data";
+import { socialIcon } from "./SocialIcons";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -51,11 +52,21 @@ export default function Contact() {
             <Magnetic>
               <a href={`tel:+2${profile.phone}`} className="btn btn-ghost"><Phone size={16} /> {profile.phone}</a>
             </Magnetic>
-            <Magnetic>
-              <a href={profile.whatsapp} target="_blank" rel="noreferrer" className="btn btn-primary">
-                <MessageCircle size={16} /> <Roll>WhatsApp</Roll>
-              </a>
-            </Magnetic>
+            <div className="wa-group">
+              <Magnetic>
+                <a href={profile.whatsapp} target="_blank" rel="noreferrer" className="btn btn-primary">
+                  <MessageCircle size={16} /> <Roll>WhatsApp</Roll>
+                </a>
+              </Magnetic>
+              {profile.socials.filter((x) => x.icon !== "github").map((x) => {
+                const Icon = socialIcon[x.icon];
+                return (
+                  <a key={x.label} href={x.href} target="_blank" rel="noreferrer" className="soc-btn" aria-label={x.label} title={x.label}>
+                    <Icon size={18} />
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </Reveal>
 

@@ -49,7 +49,7 @@ export default function About() {
 {"  "}<span className="p">stack</span>: [<span className="s">"React"</span>, <span className="s">"Next.js"</span>, <span className="s">"TypeScript"</span>],{"\n"}
 {"  "}<span className="p">languages</span>: [<span className="s">"English"</span>, <span className="s">"Arabic"</span>],{"\n"}
 {"  "}<span className="p">obsessions</span>: [<span className="s">"motion"</span>, <span className="s">"dark mode"</span>, <span className="s">"details"</span>],{"\n"}
-{"  "}<span className="p">localTime</span>: <span className="s">"{live.time} Cairo"</span>,{"\n"}
+{"  "}<span className="p">localTime</span>: <span className="s">"{live.time} {profile.city}"</span>,{"\n"}
 {"  "}<span className="p">visit</span>: <span className="k">{live.visit}</span>,{"\n"}
 {"  "}<span className="p">available</span>: <span className="k">{String(profile.available)}</span>,{"\n"}
 {"}"};<i className="caret" />

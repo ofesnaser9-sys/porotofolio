@@ -5,7 +5,8 @@ export const profile = {
   firstName: "Yosef",
   initials: "YN",
   role: "Frontend Developer",
-  location: "Egypt",
+  location: "Sohag, Egypt",
+  city: "Sohag",
   email: "ofesnaser9@gmail.com",
   phone: "01030778494",
   whatsapp: "https://wa.me/201030778494",
@@ -15,11 +16,13 @@ export const profile = {
   intro:
     "I design and build fast, polished interfaces with React and Next.js, from the first pixel to the final deploy.",
   about:
-    "I'm Yosef, a frontend developer from Egypt. I turn designs into interfaces that feel effortless: clean layouts, smooth motion, dark and light themes, and full multilingual support when a product needs it.",
+    "I'm Yosef, a frontend developer from Sohag, Egypt. I turn designs into interfaces that feel effortless: clean layouts, smooth motion, dark and light themes, and full multilingual support when a product needs it.",
+  // Replace the links below with your real profiles.
   socials: [
-    { label: "GitHub", href: "https://github.com/" },
-    { label: "LinkedIn", href: "https://linkedin.com/" },
-  ],
+    { label: "GitHub", icon: "github", href: "https://github.com/" },
+    { label: "LinkedIn", icon: "linkedin", href: "https://linkedin.com/in/" },
+    { label: "Instagram", icon: "instagram", href: "https://instagram.com/" },
+  ] as { label: string; icon: "github" | "linkedin" | "instagram"; href: string }[],
 };
 
 export const roles = [

@@ -40,6 +40,7 @@ export default function CommandPalette() {
       { label: "Give me a hint", hint: "Explore", run: () => toast(nextHint()) },
       { label: "Send an email", hint: "Contact", run: () => (window.location.href = `mailto:${profile.email}`) },
       { label: "Chat on WhatsApp", hint: "Contact", run: () => window.open(profile.whatsapp, "_blank") },
+      ...profile.socials.filter((x) => x.icon !== "github").map((x) => ({ label: `Open ${x.label}`, hint: "Contact", run: () => window.open(x.href, "_blank") })),
     ];
     if (profile.cv) base.push({ label: "Download CV", hint: "Contact", run: () => window.open(profile.cv, "_blank") });
     if (directorsUnlocked()) {
