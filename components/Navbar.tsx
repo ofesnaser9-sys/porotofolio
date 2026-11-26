@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Search, Menu, X, ArrowUpRight, MessageCircle } from "lucide-react";
+import { Search, Menu, X, ChevronRight, MessageCircle } from "lucide-react";
 import { socialIcon } from "./SocialIcons";
 import ThemeToggle from "./ThemeToggle";
 import { goTo } from "../lib/nav";
@@ -87,36 +87,30 @@ export default function Navbar() {
             <Search size={14} /> <kbd>Ctrl K</kbd>
           </button>
           <ThemeToggle />
-          <button className="icon-btn nav-burger" onClick={() => setOpen(true)} aria-label="Open menu" aria-expanded={open}>
-            <Menu size={16} />
+          <button className="icon-btn nav-burger" onClick={() => setOpen((o) => !o)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
+            {open ? <X size={16} /> : <Menu size={16} />}
           </button>
         </div>
       </motion.nav>
 
-      <div className={`mnav ${open ? "open" : ""}`} role="dialog" aria-modal="true" aria-label="Menu" aria-hidden={!open}>
-        <div className="mnav-head">
-          <span className="mnav-brand">OFES<span> NASER</span></span>
-          <button className="icon-btn mnav-close" onClick={() => setOpen(false)} aria-label="Close menu" tabIndex={open ? 0 : -1}><X size={16} /></button>
-        </div>
-        <div className="mnav-links">
+      <div className={`msheet-bg ${open ? "open" : ""}`} onClick={() => setOpen(false)} aria-hidden="true" />
+      <div className={`msheet ${open ? "open" : ""}`} role="dialog" aria-label="Menu" aria-hidden={!open}>
+        <nav className="msheet-links">
           {links.map((l, i) => (
-            <a key={l.id} href={`#${l.id}`} ref={i === 0 ? first : undefined} tabIndex={open ? 0 : -1} style={{ ["--i" as any]: i }}
-              onClick={(e) => { e.preventDefault(); setOpen(false); setTimeout(() => goTo(l.id), 260); }}>
-              <small>{String(i + 1).padStart(2, "0")}</small>
+            <a key={l.id} href={`#${l.id}`} ref={i === 0 ? first : undefined} tabIndex={open ? 0 : -1}
+              className={active === l.id ? "on" : ""} style={{ ["--i" as any]: i }}
+              onClick={(e) => { e.preventDefault(); setOpen(false); setTimeout(() => goTo(l.id), 220); }}>
               <span>{l.label}</span>
-              <ArrowUpRight size={18} className="mnav-arrow" />
+              <ChevronRight size={16} />
             </a>
           ))}
-        </div>
-        <div className="mnav-foot">
-          <div className="mnav-soc">
-            <a href={profile.whatsapp} target="_blank" rel="noreferrer" className="soc-btn" aria-label="WhatsApp" tabIndex={open ? 0 : -1}><MessageCircle size={18} /></a>
-            {profile.socials.map((x) => {
-              const Icon = socialIcon[x.icon];
-              return <a key={x.label} href={x.href} target="_blank" rel="noreferrer" className="soc-btn" aria-label={x.label} tabIndex={open ? 0 : -1}><Icon size={18} /></a>;
-            })}
-          </div>
-          <a href={`mailto:${profile.email}`} className="mnav-mail" tabIndex={open ? 0 : -1}>{profile.email}</a>
+        </nav>
+        <div className="msheet-foot">
+          <a href={profile.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp" tabIndex={open ? 0 : -1}><MessageCircle size={18} /></a>
+          {profile.socials.map((x) => {
+            const Icon = socialIcon[x.icon];
+            return <a key={x.label} href={x.href} target="_blank" rel="noreferrer" aria-label={x.label} tabIndex={open ? 0 : -1}><Icon size={18} /></a>;
+          })}
         </div>
       </div>
     </>
